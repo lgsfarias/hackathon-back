@@ -23,11 +23,10 @@ export async function getSports(req, res) {
 }
 
 export async function createSport(req, res) {
-    const { name, description } = req.body;
     try {
         const sport = await db
             .collection('sports')
-            .insertOne({ name, description });
+            .insertOne(req.body);
         res.status(201).send(sport);
     } catch (error) {
         res.status(500).send(error);
